@@ -1,0 +1,140 @@
+--This project utilizes the following Superstore data: 
+
+CREATE TABLE superstore (
+    item_id INTEGER PRIMARY KEY,
+    item_name TEXT,
+    category TEXT,
+    price DECIMAL(10, 2),
+    stock_quantity INTEGER,
+    average_rating DECIMAL(3, 2)
+);
+
+INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
+VALUES
+    (1, 'Stainless Steel Cookware Set', 'Kitchen Supplies', 89.99, 50, 4.6),
+    (2, 'Memory Foam Mattress', 'Furnishings', 499.99, 30, 4.8),
+    (3, 'Smart LED TV', 'Electronics', 549.00, 20, 4.5),
+    (4, 'Robot Vacuum Cleaner', 'Appliances', 199.50, 40, 4.3),
+    (5, 'Wireless Bluetooth Speaker', 'Electronics', 39.99, 60, 4.2),
+    (6, 'Non-Stick Baking Set', 'Kitchen Supplies', 29.95, 80, 4.4),
+    (7, 'Cotton Bedding Set', 'Furnishings', 89.00, 25, 4.7),
+    (8, 'Smart Home Security Camera', 'Electronics', 79.95, 15, 4.1),
+    (9, 'Air Purifier', 'Appliances', 129.50, 35, 4.6),
+    (10, 'Premium Coffee Maker', 'Kitchen Supplies', 79.99, 50, 4.9),
+    (11, 'Ergonomic Office Chair', 'Furnishings', 189.00, 20, 4.5),
+    (12, 'Wireless Earbuds', 'Electronics', 49.99, 75, 4.3),
+    (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
+    (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
+    (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+
+
+--below find the SQL queries I used on the Superstore database and the results generated to get information and statistics about items in the store
+
+
+-- orders items by price in ascending order
+SELECT *
+FROM superstore
+WHERE price > 0
+ORDER BY price 
+;
+
+Query #1 Execution time: 0.04ms
+item_id	  item_name	                    category	        price	  stock_quantity	average_rating
+15	      Cozy Throw Blanket	          Furnishings	      24.99	  100	            4.2
+6	        Non-Stick Baking Set	        Kitchen Supplies	29.95	  80	            4.4
+14	      Cutlery Set	                  Kitchen Supplies	34.5	  40	            4.4
+5	        Wireless Bluetooth Speaker	  Electronics	      39.99	  60	            4.2
+13	      Slow Cooker	                  Appliances	      49.95	  30	            4.7
+12	      Wireless Earbuds	            Electronics	      49.99	  75	            4.3
+8	        Smart Home Security Camera	  Electronics	      79.95	  15	            4.1
+10	      Premium Coffee Maker	        Kitchen Supplies	79.99	  50	            4.9
+7	        Cotton Bedding Set	          Furnishings	      89	    25	            4.7
+1	        Stainless Steel Cookware Set	Kitchen Supplies	89.99	  50	            4.6
+9	        Air Purifier	                Appliances	      129.5	  35	            4.6
+11	      Ergonomic Office Chair	      Furnishings	      189	    20	            4.5
+4	        Robot Vacuum Cleaner	        Appliances	      199.5	  40	            4.3
+2	        Memory Foam Mattress	        Furnishings	      499.99	30	            4.8
+3	        Smart LED TV	                Electronics	      549	    20	            4.5
+
+
+-- AVG Price of all items
+SELECT AVG(price)
+FROM superstore
+;
+
+Query #2 Execution time: 0.01ms
+AVG(price)
+142.35266666666666
+
+
+-- shows items total count
+SELECT COUNT(item_name)
+FROM superstore
+;
+
+Query #3 Execution time: 0.01ms
+COUNT(item_name)
+15
+
+
+-- select the min price of all items
+SELECT MIN(price)
+FROM superstore
+;
+
+Query #4 Execution time: 0.01ms
+MIN(price)
+24.99
+
+
+-- select the max price of all items
+SELECT MAX(price)
+FROM superstore
+;
+
+Query #5 Execution time: 0.01ms
+MAX(price)
+549
+
+
+-- select avg price of items in the kitchen supplies category
+SELECT AVG(price), category
+FROM superstore
+Where category = 'Kitchen Supplies'
+;
+
+Query #6 Execution time: 0.01ms
+AVG(price)	category
+58.607499999999995	Kitchen Supplies
+
+
+-- count how many items are in the kitchen supplies 
+SELECT Count(category)
+FROM superstore
+Where category = 'Kitchen Supplies'
+;
+
+Query #7 Execution time: 0.01ms
+Count(category)
+4
+
+
+-- check stock quantity of all items
+SELECT SUM(stock_quantity)
+FROM superstore
+; 
+
+Query #8 Execution time: 0.01ms
+SUM(stock_quantity)
+670
+
+
+-- check stock quantity of a specific item in a category (slow cooker)
+SELECT SUM(stock_quantity)
+FROM superstore
+Where item_name = 'Slow Cooker'
+; 
+
+Query #9 Execution time: 0.01ms
+SUM(stock_quantity)
+30
