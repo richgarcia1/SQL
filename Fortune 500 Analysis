@@ -71,7 +71,7 @@ WHERE employees >= 10000
 ORDER BY avg_employee_tenure desc
 ;
 
-Query #1 Execution time: 0.03ms
+Query #1 
 company_name	             avg_employee_tenure	  revenue
 Exxon Mobil Corporation	        7.8	              265.01
 JPMorgan Chase & Co.	          6.9	              160.1
@@ -88,7 +88,7 @@ FROM fortune_companies
 WHERE employees >= 10000
 ;
 
-Query #2 Execution time: 0.02ms
+Query #2 
 average_maternity_leave_weeks	    average_tenure_years
     9.666666666666666	                     6
 
@@ -100,7 +100,7 @@ FROM fortune_companies
 WHERE healthcare_benefits = 1 AND maternity_leave_weeks >= 8
 ;
 
-Query #3 Execution time: 0.02ms
+Query #3 
 company_name	      maternity_leave_weeks
 Apple Inc.	              12
 Walmart Inc.	             8
@@ -141,7 +141,7 @@ FROM fortune_companies
 WHERE avg_employee_tenure >= 6 AND paid_time_off_days >= 20
 ;
 
-Query #4 Execution time: 0.01ms
+Query #4 
 company_name	      avg_employee_tenure	      paid_time_off_days
 JPMorgan Chase & Co.	    6.9	                        21
 Company D	                6.5	                        20
@@ -164,7 +164,7 @@ WHERE healthcare_benefits = 1
 GROUP BY industry
 ;
 
-Query #5 Execution time: 0.04ms
+Query #5
 industry	      total_revenue
 Energy	            810.9
 Finance	            240.4
@@ -177,14 +177,14 @@ Telecommunications	491.6
 
 
 
--- rounded average of revenue per industry of companies over 100 in revenue                                          
+-- rounded average of revenue per industry of companies over 100 in revenue  
 SELECT industry, ROUND(AVG(revenue),1) as avg_revenue 
 FROM fortune_companies
 GROUP BY industry
 HAVING avg_revenue >= 100
 ;
 
-Query #6 Execution time: 0.03ms
+Query #6 
 
 industry	            avg_revenue
 Energy	                269.4
@@ -209,7 +209,7 @@ FROM fortune_companies
 GROUP BY revenue_total
 ;
 
-Query #7 Execution time: 0.04ms
+Query #7 
 
 companies	    revenue_total
   15	            >100
