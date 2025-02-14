@@ -1,0 +1,94 @@
+-- This project utilizes a database with multiple tables.  I am querying the database to quantify statistics about customer ansd order data
+
+-- The database is large and not practical to include below, here is a link to find it on dropbox: https://www.dropbox.com/s/cvsasmtr8syq2c2/BIT_DB?dl=0
+
+
+
+1. How many many unique orders were placed in January? In other words, how many distinct order ids do we have? 
+
+-- displays how many unique orders placed in january
+
+SELECT COUNT(DISTINCT orderID) AS unique_orders
+FROM BIT_DB.JanSales
+WHERE length(orderID) = 6
+AND orderID <> 'Order ID'
+;
+
+
+
+2. How many of those orders were for an iPhone?
+
+-- displays january iphone orders
+
+SELECT COUNT(DISTINCT orderID) AS jan_iphone_orders
+FROM BIT_DB.JanSales
+WHERE length(orderID) = 6
+AND orderID <> 'Order ID'
+AND Product = 'iPhone'
+;
+ 
+
+
+3. Select the customer account numbers for all the orders that were placed in February.
+
+-- displays customer account numbers for all orders in febuaary
+
+SELECT DISTINCT acctnum 
+FROM BIT_DB.customers AS cust
+INNER JOIN BIT_DB.FebSales AS feb
+ON cust.order_id = feb.orderID
+WHERE length(orderID) = 6
+AND orderID <> 'Order ID' 
+;
+
+
+
+4. Which product was the cheapest one sold in January, and what was the price?
+
+-- displays lowest sold item and price
+
+SELECT Product, price
+FROM BIT_DB.JanSales
+WHERE length(orderID) = 6
+AND orderID <> 'Order ID'
+ORDER BY price ASC LIMIT 1 
+;
+
+
+
+5. What is the total revenue for each product sold in January? 
+
+-- displays total revenue for each product sold in january
+
+SELECT ROUND(SUM(Quantity) * price, 2) AS revenue, Product   
+FROM BIT_DB.JanSales 
+GROUP BY Product
+; 
+
+
+
+6. Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+
+-- displays order details for 548 lincoln st
+
+SELECT Product, SUM(Quantity) AS Quantity, ROUND(SUM(Quantity), 2) * price AS total_revenue
+FROM BIT_DB.FebSales
+WHERE location = '548 Lincoln St, Seattle, WA 98101'
+GROUP BY Product
+;
+
+
+
+7. How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+
+-- displays febuary orders of more than 2 products and the average amount spent per customer
+
+SELECT COUNT(DISTINCT acctnum) AS customers, ROUND(AVG(Quantity * price), 2) AS average_spent
+FROM BIT_DB.FebSales AS feb
+LEFT JOIN BIT_DB.customers AS cust
+ON feb.orderID = cust.order_id 
+WHERE Quantity > 2
+AND length(orderid) = 6 
+AND orderid <> 'Order ID';
+;
+
