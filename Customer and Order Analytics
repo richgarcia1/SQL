@@ -1,4 +1,4 @@
--- This project utilizes a database with multiple tables.  I am querying the database to quantify statistics about customer ansd order data
+-- This project utilizes a database with multiple tables.  I am querying the database to quantify statistics about customer and order data
 
 -- The database is large and not practical to include below, here is a link to find it on dropbox: https://www.dropbox.com/s/cvsasmtr8syq2c2/BIT_DB?dl=0
 
