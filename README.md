@@ -3,7 +3,7 @@
 
 
 
-# Hey there, I am Rich Garcia!
+# Hey now, I am Rich Garcia!
 ## Data Enthusiast | SQL Researcher | Problem Solver
 I'm passionate about data, databases and writing efficient queries that bring meaningful insights to life.
 ##
